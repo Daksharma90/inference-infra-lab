@@ -134,3 +134,10 @@ With 8 users in a batch, the **total** across everyone is about 8x that (about 1
 ## One-line summary
 
 > Matrix × matrix reuses each number thousands of times, so it's compute-bound. Matrix × one vector uses each number once, so it's memory-bound. LLM decoding is matrix × vector, which is why servers batch many users: one read of the weights serves everyone.
+
+
+If 4 users share a batch for a model on your T4, what is the intensity of decoding? And is it memory-bound or compute-bound?
+Answer: Decoding with 4 users:
+- intensity = calculations ÷ bytes moved ≈ 4 (weights read once, used by 4 users)
+- T4 ridge point = 80 (the bar the job must clear)
+- 4 < 80, so memory-bound. About 5% of the calculating power is used.
